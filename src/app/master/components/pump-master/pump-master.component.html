@@ -1,0 +1,118 @@
+<div class="pump-master-container">
+  <!-- table section -->
+  <div class="table-section">
+    <div class="table">
+      <div class="search">
+        <input matInput (keyup)="applyFilter($event)" placeholder="search" #input matInput type="text"
+          [(ngModel)]="value">
+        <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="model">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Pump Model </th>
+          <td mat-cell *matCellDef="let element"> {{element.model}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef> Pump Type </th>
+          <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Pump Category </th>
+          <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="shortName">
+          <th mat-header-cell *matHeaderCellDef> Pump Short Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.shortName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let element"> <mat-slide-toggle [(ngModel)]="element.Checked"></mat-slide-toggle>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef> Action </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button matTooltip="Edit" (click)="isLoggedIn ='1'" (click)="pumpMasterEditFn(element)" color="accent">
+              <mat-icon aria-label="Edit">edit</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Delete" (click)="openDialog(element.id)" color="warn">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumn"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumn;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 8, 10]" showFirstLastButtons aria-label="Select page">
+      </mat-paginator>
+    </div>
+  </div>
+  <!-- form section -->
+  <div class="form-section">
+    <h1>Pump Master</h1>
+    <form [formGroup]="form" novalidate>
+      <mat-form-field class="example-full-width">
+        <mat-label>Pump Model</mat-label>
+        <input matInput type="text" formControlName="model" name="model" [(ngModel)]="pumpMaster.model">
+        <mat-error *ngIf="myError('model', 'required')">pumpModel is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field  class="example-full-width">
+        <mat-label>Pump Type</mat-label>
+        <mat-select formControlName="type" name="type" [(ngModel)]="pumpMaster.type">
+          <mat-option value="Keerthi"> Keerthi</mat-option>
+          <mat-option value="OEM"> OEM</mat-option>
+        </mat-select>
+        <mat-error *ngIf="myError('type', 'required')">pumpType is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Pump Short Name</mat-label>
+        <input type="text" matInput formControlName="shortName" name="shortName" [(ngModel)]="pumpMaster.shortName">
+        <mat-error *ngIf="myError('shortName', 'required')">pumpShortName is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Pump ShortName Id</mat-label>
+        <input type="text" matInput formControlName="shortNameId" name="shortNameId" [(ngModel)]="pumpMaster.shortNameId">
+        <mat-error *ngIf="myError('shortNameId', 'required')">pumpShortNameId is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Pump Category</mat-label>
+        <input type="text" matInput formControlName="category" name="category" [(ngModel)]="pumpMaster.category">
+        <mat-error *ngIf="myError('category', 'required')">pumpCategory is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Pump Category Id</mat-label>
+        <input type="text" matInput formControlName="categoryId" name="categoryId" [(ngModel)]="pumpMaster.categoryId">
+        <mat-error *ngIf="myError('categoryId', 'required')">pumpCategoryId is required</mat-error>
+      </mat-form-field>
+
+      <div class="btns">
+        <button mat-flat-button color="primary" *ngIf="isLoggedIn =='2'" (click)="pumpMasterSaveFn()" [disabled]="!form.valid">Save</button>
+        <button mat-flat-button color="primary" *ngIf="isLoggedIn =='1'" (click)="isLoggedIn ='2'" type="submit"
+          (click)="pumpMasterUpdateFn()">Update</button>
+        <button mat-flat-button color="warn" (click)="clear()">Reset</button>
+      </div>
+    </form>
+  </div>
+  <a mat-fab color="accent" class="btn-l" routerLink="/master/material-grade">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+  </a>
+  <a mat-fab color="accent" class="btn-r" routerLink="/master/part-master">
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </a>
+</div>
+<notifier-container></notifier-container>
+

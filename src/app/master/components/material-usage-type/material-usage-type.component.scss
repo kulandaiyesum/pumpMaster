@@ -1,0 +1,72 @@
+.material-usage-type-container {
+  background-color: #eee;
+  min-height: 100vh;
+  max-height: max-content;
+  display: flex;
+  justify-content: space-around;
+  align-items:flex-start;
+  position: relative;
+  .table-container {
+    width: 50%;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 7rem;
+    margin-bottom: 5rem;
+    .search {
+      display: inline-flex;
+      border: 1px solid #ccc;
+      text-align: center;
+      padding: 6px;
+      margin-bottom: 20px;
+      width: 80%;
+      input {
+        padding: 6px;
+      }
+      button {
+        color: #bbb;
+      }
+    }
+    table {
+    width: 100%;
+      th {
+        background-color: #37474f;
+        color: #fff;
+        font-size: 16px;
+        padding-left: 20px;
+      }
+      // th:hover {
+      //   background-color: blue;
+      //   color: #ff4081;
+      // }
+      td{
+        padding-left: 20px;
+      }
+    }
+  }
+  .form-container {
+    width: 20%;
+    padding: 20px;
+    align-self: center;
+    background-color: white;
+    box-shadow: 0 0 1px 1px #ccc;
+    border-radius: 10px;
+    h1 {
+      text-align: center;
+    }
+    mat-form-field {
+      width: 100%;
+    }
+    .btns {
+      text-align: right;
+      margin: 50px 0;
+      button {
+        margin-left: 20px;
+      }
+    }
+  }
+  .btn-a {
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+  }
+}

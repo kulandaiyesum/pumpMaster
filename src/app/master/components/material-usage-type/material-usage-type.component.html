@@ -1,0 +1,50 @@
+
+<div class="material-usage-type-container">
+
+  <div class="table-container">
+    <div class="search">
+      <input matInput (keyup)="applyFilter($event)" placeholder="search" #input matInput type="text" [(ngModel)]="value">
+      <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    
+      <ng-container matColumnDef="matUseType">
+        <th mat-header-cell *matHeaderCellDef> Material Uasage Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.matUseType}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element"> <mat-slide-toggle [(ngModel)]="element.isChecked"></mat-slide-toggle> </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 8, 10]" showFirstLastButtons aria-label="Select page">
+    </mat-paginator>
+  </div>
+
+  <div class="form-container">
+    <h1>Material Uasage Type Master</h1>
+    <mat-form-field >
+      <mat-label>Material Uasage Type</mat-label>
+      <mat-select name="matUseType" [(ngModel)]="mut.matUseType">
+        <mat-option value="CASTING">CASTING</mat-option>
+        <mat-option value="ROD">ROD</mat-option>
+        <mat-option value="BOUGHT OUT">BOUGHT OUT</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="btns">
+      <button mat-flat-button color="primary" (click)="mutSave()">Save</button>
+      <button mat-flat-button color="warn" (click)="mutReset()">Reset</button>
+    </div>
+  </div>
+
+  <a mat-fab color="accent" class="btn-a" routerLink="/master/material-grade">
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </a>
+</div>

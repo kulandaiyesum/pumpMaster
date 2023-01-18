@@ -3,7 +3,24 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  pkey: '3fdfabc1bcc185d03fe95d7e7dc9803d',
+  apikey: 'hCA0zjIgflDAMsOJcSLoY5hzlYoNFSRX',
+
+  loginApi: 'https://dev-shinelogic.gateway.apiplatform.io/v1/pumpMaster', // login
+
+  apikpstUrl:
+    'https://dev-shinelogic.gateway.apiplatform.io/v1/materialUseType', // material-uasage-type
+
+  apiMaterialGradeUrl:
+    'https://dev-shinelogic.gateway.apiplatform.io/v1/materialGrade', // grade master
+
+  loginBaseUrl: 'https://dev-shinelogic.gateway.apiplatform.io/v1/getUesrLogin', // login check
+
+  apiPumpMaster: 'https://dev-shinelogic.gateway.apiplatform.io/v1/pumpDetails', // pump master
+
+  apiPumpPart: 'https://dev-shinelogic.gateway.apiplatform.io/v1/pumpPart', // pump part
 };
 
 /*

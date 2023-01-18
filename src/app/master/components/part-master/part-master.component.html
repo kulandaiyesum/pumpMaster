@@ -1,0 +1,103 @@
+<div class="part-master-container">
+  <!-- table section -->
+  <div class="table-section">
+    <div class="table">
+      <div class="search">
+        <input matInput (keyup)="applyFilter($event)" placeholder="search" #input matInput type="text"
+          [(ngModel)]="value">
+        <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="partName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Part Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.partName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="partShortName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Part Short Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.partShortName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="partNo">
+          <th mat-header-cell *matHeaderCellDef> Part No</th>
+          <td mat-cell *matCellDef="let element"> {{element.partNo}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="usageType">
+          <th mat-header-cell *matHeaderCellDef> part Usage Type </th>
+          <td mat-cell *matCellDef="let element"> {{element.usageType}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let element"> <mat-slide-toggle [(ngModel)]="element.Checked"></mat-slide-toggle>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef> Action </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button matTooltip="Edit" (click)="isLoggedIn ='1'" (click)="partEditFn(element)" color="accent">
+              <mat-icon aria-label="Edit">edit</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Delete" (click)="openDialog(element.id)" color="warn">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumn"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumn;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 8, 10]" showFirstLastButtons aria-label="Select page">
+      </mat-paginator>
+    </div>
+  </div>
+  <!-- form section -->
+  <div class="form-section">
+    <h1>Part Master</h1>
+    <form action="" [formGroup]="form" novalidate>
+      <mat-form-field class="example-full-width">
+        <mat-label>Part Name</mat-label>
+        <input matInput type="text" formControlName="partName" name="partName" [(ngModel)]="partMaster.partName">
+        <mat-error *ngIf="myError('partName', 'required')">partName is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Part Short Name</mat-label>
+        <input matInput formControlName="partShortName" name="partShortName"
+          [(ngModel)]="partMaster.partShortName">
+        <mat-error *ngIf="myError('partShortName', 'required')">partShortName is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Part No</mat-label>
+        <input type="text" matInput formControlName="partNo" name="partNo"
+          [(ngModel)]="partMaster.partNo">
+        <mat-error *ngIf="myError('partNo', 'required')">partNo is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Usage Type</mat-label>
+        <mat-select formControlName="usageType" name="usageType" [(ngModel)]="partMaster.usageType">
+          <mat-option *ngFor="let ele of dVal" [value]="ele.matUseType">{{ele.matUseType}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="myError('usageType', 'required')">usageType is required</mat-error>
+      </mat-form-field>
+
+      <div class="btns">
+        <button mat-flat-button color="primary" *ngIf="isLoggedIn =='2'" [disabled]="!form.valid" (click)="partSaveFn()">Save</button>
+        <button mat-flat-button color="primary" *ngIf="isLoggedIn =='1'" (click)="isLoggedIn ='2'" (click)="partUpdateFn()" type="submit"
+          >Update</button>
+        <button mat-flat-button color="warn" (click)="clear()">Reset</button>
+      </div>
+    </form>
+  </div>
+  <a mat-fab color="accent" class="btn-l" routerLink="/master/pump-master">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+  </a>
+</div>
+<notifier-container></notifier-container>

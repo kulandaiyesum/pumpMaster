@@ -1,0 +1,55 @@
+.login-container {
+  background: url('../../../../assets/img/BG10.jpg') ;
+  height: 100%;
+  .head {
+    // background-color: #607d8b;
+    height: 150px;
+    margin-bottom: 60px;
+    img {
+      width: 30%;
+      height: 100%;
+    }
+  }
+  .row {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    justify-content: space-evenly;
+    align-items: center;
+    .imgs{
+      width: 50%;
+      // display: flex;
+      // flex-wrap: wrap;
+      img {
+        width:100%;
+        height: auto;
+      }
+    }
+    .login-form {
+      width: 20%;
+      // box-shadow: 1px 1px 2px 1px #ccc, -1px -1px 1px 1px #ccc;
+      border-radius: 20px;
+      padding: 20px;
+      background-color: white;
+      height: fit-content;
+      h2 {
+        text-align: center;
+      }
+      form {
+        width: 100%;
+        mat-form-field { 
+          width: 100%;
+          margin-bottom: 20px;
+        }
+        .btns {
+          text-align: center;
+          // button {
+          //    font-size: 16px;
+          //    padding: 0 40px;
+          //    color: white;
+          // }
+        }
+      }
+    }
+  }
+}

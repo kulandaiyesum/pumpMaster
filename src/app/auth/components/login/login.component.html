@@ -1,0 +1,42 @@
+<div class="login-container">
+  <!-- <div class="head">
+    <img src="../../../../assets/img/logo.png" alt="logo">
+  </div> -->
+
+  <div class="row">
+    <div class="imgs">
+      <img src="../../../../assets/img/logo.png" alt="logo" width="200" height="150">
+    </div>
+    <div class="login-form">
+      <h2>Login</h2>
+      <form [formGroup]="myForm" novalidate>
+        <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput placeholder="Ex. pat@example.com" formControlName="emailId" name="emailId" [(ngModel)]="login.emailId">
+          <mat-error *ngIf="myForm.controls['emailId'].hasError('email') && !myForm.controls['emailId'].hasError('required')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="myForm.controls['emailId'].hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+          <!-- <mat-error *ngIf="myError('emailId', 'required')">email is required</mat-error>
+          <mat-error *ngIf="myError('emailId', 'email')">Please enter a valid email address</mat-error> -->
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" name="password" [(ngModel)]="login.password">
+          <!-- <mat-error *ngIf="myError('gradeName', 'required')">password is required</mat-error> -->
+          <mat-error *ngIf="myForm.controls['password'].hasError('required')">
+            Password is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <div class="btns">
+          <button mat-flat-button color="primary" [disabled]="!myForm.valid" (click)="loginGetFn()">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<notifier-container></notifier-container>
